@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Para Liz 💜</title>
@@ -14,44 +13,52 @@
       font-family: Arial, sans-serif;
       text-align: center;
       color: #fff;
-    }
+      overflow: hidden;
+    }.card {
+  background: rgba(255,255,255,0.1);
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 400px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
 
-    .card {
-      background: rgba(255,255,255,0.1);
-      padding: 30px;
-      border-radius: 20px;
-      max-width: 400px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
+button {
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background: #7e22ce;
+  color: white;
+  cursor: pointer;
+}
 
-    button {
-      padding: 12px 24px;
-      font-size: 18px;
-      border: none;
-      border-radius: 10px;
-      background: #7e22ce;
-      color: white;
-      cursor: pointer;
-    }
+button:hover {
+  background: #6b21a8;
+}
 
-    button:hover {
-      background: #6b21a8;
-    }
+.hidden {
+  display: none;
+}
 
-    .hidden {
-      display: none;
-    }
+/* Botón secreto invisible */
+.secret-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
   </style>
 </head>
-<body>
-
-<div id="inicio">
+<body><div id="inicio">
   <h1>Tengo algo para vos 💜</h1>
   <button onclick="mostrar()">Abrir</button>
-</div>
-
-<div id="mensaje" class="hidden">
+</div><div id="mensaje" class="hidden">
   <div class="card">
     <h2>Para Liz 💜</h2>
     <p>
@@ -63,16 +70,12 @@
       Tu voz tiene algo que me calma, que me hace bien,
       y cada momento con vos se siente especial.
     </p>
-    <p><b>Y si tengo que decirlo simple… sos todo lo que quiero en mi vida 💜</b></p>
+    <p><b>Y si tengo que decirlo simple… me importás muchísimo 💜</b></p>
   </div>
-</div>
-
-<script>
+</div><!-- BOTÓN SECRETO --><div class="secret-btn" onclick="window.location.href='secreto.html'"></div><script>
   function mostrar() {
     document.getElementById("inicio").style.display = "none";
     document.getElementById("mensaje").style.display = "block";
   }
-</script>
-
-</body>
+</script></body>
 </html>
