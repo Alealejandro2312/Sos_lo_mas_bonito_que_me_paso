@@ -1,0 +1,7 @@
+﻿import { useState } from "react"; import { motion } from "framer-motion"; import { Button } from "@/components/ui/button"; import { Card, CardContent } from "@/components/ui/card";
+
+
+export default function LovePage() { const [open, setOpen] = useState(false);
+
+
+return ( <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-200 to-purple-400 p-6"> {!open ? ( <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-center" > <h1 className="text-3xl font-bold mb-6">Tengo algo para vos 💜</h1> <Button onClick={() => setOpen(true)} className="text-lg px-6 py-3"> Abrir </Button> </motion.div> ) : ( <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full max-w-md" > <Card className="rounded-2xl shadow-xl"> <CardContent className="p-6 text-center"> <h2 className="text-2xl font-semibold mb-4">Para Liz 💜</h2> <p className="text-base leading-relaxed"> No sé cómo explicarlo del todo, pero me encanta escucharte, me encanta reírme con vos y sentir que, incluso a la distancia, estás cerquita. </p> <p className="mt-4 text-base leading-relaxed"> Tu voz tiene algo que me calma, que me hace bien, y cada momento con vos se siente especial. </p> <p className="mt-4 font-medium"> Y si tengo que decirlo simple… me importás muchísimo 💜 </p> </CardContent> </Card> </motion.div> )} </div> ); }
