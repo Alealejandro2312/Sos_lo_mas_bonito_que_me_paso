@@ -44,14 +44,19 @@ button:hover {
 /* Botón secreto invisible */
 .secret-btn {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  width: 20px;
-  height: 20px;
-  background: transparent;
+  bottom: 15px;
+  right: 15px;
+  width: 25px;
+  height: 25px;
+  background: rgba(255,255,255,0.15);
   border-radius: 50%;
   cursor: pointer;
+  backdrop-filter: blur(5px);
+  transition: 0.3s;
 }
+
+.secret-btn:hover {
+  background: rgba(255,255,255,
 
   </style>
 </head>
