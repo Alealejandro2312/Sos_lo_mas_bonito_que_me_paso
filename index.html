@@ -1,7 +1,78 @@
-﻿import { useState } from "react"; import { motion } from "framer-motion"; import { Button } from "@/components/ui/button"; import { Card, CardContent } from "@/components/ui/card";
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Liz 💜</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #d8b4fe, #a855f7);
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: #fff;
+    }
 
+    .card {
+      background: rgba(255,255,255,0.1);
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 400px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
 
-export default function LovePage() { const [open, setOpen] = useState(false);
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background: #7e22ce;
+      color: white;
+      cursor: pointer;
+    }
 
+    button:hover {
+      background: #6b21a8;
+    }
 
-return ( <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-200 to-purple-400 p-6"> {!open ? ( <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-center" > <h1 className="text-3xl font-bold mb-6">Tengo algo para vos 💜</h1> <Button onClick={() => setOpen(true)} className="text-lg px-6 py-3"> Abrir </Button> </motion.div> ) : ( <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full max-w-md" > <Card className="rounded-2xl shadow-xl"> <CardContent className="p-6 text-center"> <h2 className="text-2xl font-semibold mb-4">Para Liz 💜</h2> <p className="text-base leading-relaxed"> No sé cómo explicarlo del todo, pero me encanta escucharte, me encanta reírme con vos y sentir que, incluso a la distancia, estás cerquita. </p> <p className="mt-4 text-base leading-relaxed"> Tu voz tiene algo que me calma, que me hace bien, y cada momento con vos se siente especial. </p> <p className="mt-4 font-medium"> Y si tengo que decirlo simple… me importás muchísimo 💜 </p> </CardContent> </Card> </motion.div> )} </div> ); }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div id="inicio">
+  <h1>Tengo algo para vos 💜</h1>
+  <button onclick="mostrar()">Abrir</button>
+</div>
+
+<div id="mensaje" class="hidden">
+  <div class="card">
+    <h2>Para Liz 💜</h2>
+    <p>
+      No sé cómo explicarlo del todo, pero me encanta escucharte,
+      me encanta reírme con vos y sentir que, incluso a la distancia,
+      estás cerquita.
+    </p>
+    <p>
+      Tu voz tiene algo que me calma, que me hace bien,
+      y cada momento con vos se siente especial.
+    </p>
+    <p><b>Y si tengo que decirlo simple… me importás muchísimo 💜</b></p>
+  </div>
+</div>
+
+<script>
+  function mostrar() {
+    document.getElementById("inicio").style.display = "none";
+    document.getElementById("mensaje").style.display = "block";
+  }
+</script>
+
+</body>
+</html>
