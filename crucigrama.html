@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Crucigrama 💜</title>
+<title>Solo para ti 💜</title>
 
 <style>
 body {
@@ -11,20 +11,35 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(circle at top, #3b0764, #12001f);
+  background: radial-gradient(circle at top, #2e1065, #0b0018);
   font-family: Arial, sans-serif;
   color: white;
+  overflow: hidden;
+}
+
+/* BRILLO FONDO */
+body::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: rgba(168,85,247,0.25);
+  filter: blur(120px);
+  border-radius: 50%;
+  top: -100px;
+  left: -100px;
 }
 
 /* CONTENEDOR */
 .container {
   display: flex;
-  gap: 40px;
+  gap: 30px;
   background: rgba(255,255,255,0.06);
   padding: 25px;
-  border-radius: 22px;
-  box-shadow: 0 0 30px rgba(168,85,247,0.4);
-  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 40px rgba(168,85,247,0.35);
+  z-index: 1;
 }
 
 /* TABLA */
@@ -32,13 +47,15 @@ table {
   border-collapse: collapse;
 }
 
+/* CELDAS */
 td {
-  width: 40px;
-  height: 40px;
-  border: 1px solid rgba(255,255,255,0.12);
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,0.08);
   position: relative;
 }
 
+/* INPUT */
 input {
   width: 100%;
   height: 100%;
@@ -49,32 +66,39 @@ input {
   font-size: 16px;
   background: rgba(168,85,247,0.12);
   color: white;
-  border-radius: 5px;
+  transition: 0.2s;
 }
 
-/* CASILLAS NEGRAS */
+input:focus {
+  background: rgba(168,85,247,0.35);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(168,85,247,0.6);
+}
+
+/* BLOQUES NEGROS */
 .block {
-  background: rgba(0,0,0,0.65);
+  background: rgba(0,0,0,0.75);
+  border: none;
 }
 
 /* NÚMEROS */
 .num {
   position: absolute;
-  top: 2px;
+  top: 3px;
   left: 4px;
   font-size: 10px;
-  opacity: 0.8;
   color: #d8b4fe;
+  opacity: 0.9;
 }
 
 /* PISTAS */
 .clues {
-  max-width: 260px;
+  width: 260px;
 }
 
 h2 {
   color: #d8b4fe;
-  text-shadow: 0 0 10px #a855f7;
+  text-shadow: 0 0 12px #a855f7;
 }
 
 p {
@@ -84,14 +108,36 @@ p {
 
 /* BOTÓN */
 button {
-  margin-top: 10px;
+  margin-top: 12px;
   padding: 10px 14px;
   border: none;
-  border-radius: 12px;
-  background: linear-gradient(45deg, #a855f7, #7c3aed);
+  border-radius: 14px;
+  background: linear-gradient(45deg, #a855f7, #6d28d9);
   color: white;
   font-weight: bold;
   cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(168,85,247,0.5);
+}
+
+/* ANIMACIÓN WIN */
+.win {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 28px;
+  background: rgba(168,85,247,0.2);
+  padding: 20px 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  display: none;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(168,85,247,0.6);
 }
 </style>
 </head>
@@ -100,12 +146,9 @@ button {
 
 <div class="container">
 
-<!-- ===== GRILLA ===== -->
-<div>
-
+<!-- GRILLA -->
 <table>
 
-<!-- FILA 1 -->
 <tr>
 <td><span class="num">1</span><input data-a="D"></td>
 <td><input data-a="A"></td>
@@ -120,7 +163,6 @@ button {
 <td><input data-a="A"></td>
 </tr>
 
-<!-- FILA 2 -->
 <tr>
 <td><span class="num">3</span><input data-a="C"></td>
 <td><input data-a="H"></td>
@@ -135,7 +177,6 @@ button {
 <td><span class="num">4</span><input data-a="T"></td>
 </tr>
 
-<!-- FILA 3 -->
 <tr>
 <td><span class="num">5</span><input data-a="T"></td>
 <td><input data-a="A"></td>
@@ -154,7 +195,6 @@ button {
 <td><input data-a="O"></td>
 </tr>
 
-<!-- FILA 4 -->
 <tr>
 <td><span class="num">7</span><input data-a="L"></td>
 <td><input data-a="I"></td>
@@ -180,7 +220,6 @@ button {
 <td><input data-a="O"></td>
 </tr>
 
-<!-- FILA 5 -->
 <tr>
 <td><span class="num">10</span><input data-a="S"></td>
 <td><input data-a="A"></td>
@@ -208,11 +247,7 @@ button {
 
 </table>
 
-<button onclick="check()">Verificar 💜</button>
-
-</div>
-
-<!-- ===== PISTAS (VACÍAS) ===== -->
+<!-- PISTAS -->
 <div class="clues">
 <h2>💜 Pistas</h2>
 
@@ -229,8 +264,16 @@ button {
 <p>11. ________</p>
 <p>12. ________</p>
 
+<button onclick="check()">Verificar 💜</button>
+
 </div>
 
+</div>
+
+<!-- WIN MESSAGE -->
+<div class="win" id="win">
+💜 PERFECTO 💜<br>
+Lo resolviste todo
 </div>
 
 <script>
@@ -242,15 +285,15 @@ function check() {
     if (i.dataset.a) {
       if (i.value.toUpperCase() !== i.dataset.a) {
         ok = false;
-        i.style.background = "rgba(255,0,0,0.3)";
+        i.style.background = "rgba(255,0,0,0.25)";
       } else {
-        i.style.background = "rgba(0,255,150,0.25)";
+        i.style.background = "rgba(0,255,160,0.25)";
       }
     }
   });
 
   if (ok) {
-    alert("💜 Perfecto… lo resolviste");
+    document.getElementById("win").style.display = "block";
   } else {
     alert("💜 Casi… seguí intentando");
   }
