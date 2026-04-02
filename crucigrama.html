@@ -7,47 +7,47 @@
 <style>
 body {
   margin: 0;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(circle at top, #2e1065, #0b0018);
-  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #3b0764, #0a0015);
+  font-family: Arial;
   color: white;
-  overflow: hidden;
 }
 
-/* BRILLO FONDO */
-body::before {
-  content: "";
+/* PARTICULAS */
+.particle {
   position: absolute;
-  width: 600px;
-  height: 600px;
-  background: rgba(168,85,247,0.25);
-  filter: blur(120px);
+  width: 6px;
+  height: 6px;
+  background: #c084fc;
   border-radius: 50%;
-  top: -100px;
-  left: -100px;
+  animation: float 8s infinite linear;
+  opacity: 0.5;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh); }
+  to { transform: translateY(-10vh); }
 }
 
 /* CONTENEDOR */
 .container {
   display: flex;
-  gap: 30px;
+  gap: 25px;
   background: rgba(255,255,255,0.06);
-  padding: 25px;
-  border-radius: 25px;
+  padding: 20px;
+  border-radius: 20px;
   backdrop-filter: blur(12px);
-  box-shadow: 0 0 40px rgba(168,85,247,0.35);
-  z-index: 1;
+  box-shadow: 0 0 40px rgba(168,85,247,0.3);
+  z-index: 2;
 }
 
 /* TABLA */
-table {
-  border-collapse: collapse;
-}
+table { border-collapse: collapse; }
 
-/* CELDAS */
 td {
   width: 42px;
   height: 42px;
@@ -63,32 +63,27 @@ input {
   outline: none;
   text-align: center;
   text-transform: uppercase;
-  font-size: 16px;
   background: rgba(168,85,247,0.12);
   color: white;
   transition: 0.2s;
 }
 
 input:focus {
-  background: rgba(168,85,247,0.35);
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(168,85,247,0.6);
+  transform: scale(1.2);
+  background: rgba(168,85,247,0.4);
+  box-shadow: 0 0 12px #a855f7;
 }
 
-/* BLOQUES NEGROS */
-.block {
-  background: rgba(0,0,0,0.75);
-  border: none;
-}
+/* BLOQUES */
+.block { background: rgba(0,0,0,0.75); }
 
-/* NÚMEROS */
+/* NUMEROS */
 .num {
   position: absolute;
   top: 3px;
   left: 4px;
   font-size: 10px;
   color: #d8b4fe;
-  opacity: 0.9;
 }
 
 /* PISTAS */
@@ -98,55 +93,66 @@ input:focus {
 
 h2 {
   color: #d8b4fe;
-  text-shadow: 0 0 12px #a855f7;
-}
-
-p {
-  opacity: 0.9;
-  margin: 6px 0;
+  text-shadow: 0 0 10px #a855f7;
 }
 
 /* BOTÓN */
 button {
-  margin-top: 12px;
-  padding: 10px 14px;
+  margin-top: 10px;
+  padding: 10px;
   border: none;
-  border-radius: 14px;
-  background: linear-gradient(45deg, #a855f7, #6d28d9);
+  border-radius: 12px;
+  background: linear-gradient(45deg,#a855f7,#6d28d9);
   color: white;
-  font-weight: bold;
   cursor: pointer;
-  transition: 0.2s;
 }
 
-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(168,85,247,0.5);
+/* BOTÓN SECRETO */
+#secretBtn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(168,85,247,0.25);
+  border: 1px solid rgba(168,85,247,0.5);
+  cursor: pointer;
+  backdrop-filter: blur(10px);
 }
 
-/* ANIMACIÓN WIN */
+/* WIN SCREEN */
 .win {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  font-size: 28px;
   background: rgba(168,85,247,0.2);
-  padding: 20px 30px;
+  padding: 25px;
   border-radius: 20px;
-  backdrop-filter: blur(10px);
-  display: none;
   text-align: center;
-  box-shadow: 0 0 25px rgba(168,85,247,0.6);
+  display: none;
+  box-shadow: 0 0 30px #a855f7;
+  z-index: 10;
 }
+
+/* AUDIO */
+audio { display: none; }
+
 </style>
 </head>
 
 <body>
 
+<!-- BOTON SECRETO -->
+<button id="secretBtn" onclick="secret()">23 ❤ 20 01 2005 / 20 01 2003</button>
+
+<!-- MUSICA -->
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b1b7c6.mp3" type="audio/mpeg">
+</audio>
+
 <div class="container">
 
-<!-- GRILLA -->
 <table>
 
 <tr>
@@ -247,57 +253,82 @@ button:hover {
 
 </table>
 
-<!-- PISTAS -->
 <div class="clues">
 <h2>💜 Pistas</h2>
 
-<p>1. ________</p>
-<p>2. ________</p>
-<p>3. ________</p>
-<p>4. ________</p>
-<p>5. ________</p>
-<p>6. ________</p>
-<p>7. ________</p>
-<p>8. ________</p>
-<p>9. ________</p>
-<p>10. ________</p>
-<p>11. ________</p>
-<p>12. ________</p>
+<p>1. ____</p>
+<p>2. ____</p>
+<p>3. ____</p>
+<p>4. ____</p>
+<p>5. ____</p>
+<p>6. ____</p>
+<p>7. ____</p>
+<p>8. ____</p>
+<p>9. ____</p>
+<p>10. ____</p>
+<p>11. ____</p>
+<p>12. ____</p>
 
 <button onclick="check()">Verificar 💜</button>
-
 </div>
 
 </div>
 
-<!-- WIN MESSAGE -->
 <div class="win" id="win">
-💜 PERFECTO 💜<br>
-Lo resolviste todo
+💜 LO LOGRASTE 💜<br><br>
+No era solo un crucigrama...<br>
+era un mensaje escondido.
 </div>
 
 <script>
-function check() {
-  const inputs = document.querySelectorAll("input");
-  let ok = true;
 
-  inputs.forEach(i => {
-    if (i.dataset.a) {
-      if (i.value.toUpperCase() !== i.dataset.a) {
-        ok = false;
-        i.style.background = "rgba(255,0,0,0.25)";
+/* partículas */
+for(let i=0;i<40;i++){
+  let p=document.createElement("div");
+  p.className="particle";
+  p.style.left=Math.random()*100+"vw";
+  p.style.animationDuration=(5+Math.random()*5)+"s";
+  document.body.appendChild(p);
+}
+
+/* música */
+let music=document.getElementById("music");
+let playing=false;
+
+function secret(){
+  if(!playing){
+    music.play();
+    playing=true;
+    alert("💜 música activada");
+  } else {
+    music.pause();
+    playing=false;
+  }
+}
+
+/* check */
+function check(){
+  let inputs=document.querySelectorAll("input");
+  let ok=true;
+
+  inputs.forEach(i=>{
+    if(i.dataset.a){
+      if(i.value.toUpperCase()!=i.dataset.a){
+        ok=false;
+        i.style.background="rgba(255,0,0,0.25)";
       } else {
-        i.style.background = "rgba(0,255,160,0.25)";
+        i.style.background="rgba(0,255,150,0.25)";
       }
     }
   });
 
-  if (ok) {
-    document.getElementById("win").style.display = "block";
+  if(ok){
+    document.getElementById("win").style.display="block";
   } else {
-    alert("💜 Casi… seguí intentando");
+    alert("💜 casi…");
   }
 }
+
 </script>
 
 </body>
