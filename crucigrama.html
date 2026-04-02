@@ -74,10 +74,8 @@ input:focus {
   box-shadow: 0 0 12px #a855f7;
 }
 
-/* BLOQUES */
 .block { background: rgba(0,0,0,0.75); }
 
-/* NUMEROS */
 .num {
   position: absolute;
   top: 3px;
@@ -87,16 +85,13 @@ input:focus {
 }
 
 /* PISTAS */
-.clues {
-  width: 260px;
-}
+.clues { width: 260px; }
 
 h2 {
   color: #d8b4fe;
   text-shadow: 0 0 10px #a855f7;
 }
 
-/* BOTÓN */
 button {
   margin-top: 10px;
   padding: 10px;
@@ -107,7 +102,6 @@ button {
   cursor: pointer;
 }
 
-/* BOTÓN SECRETO */
 #secretBtn {
   position: absolute;
   top: 15px;
@@ -120,7 +114,7 @@ button {
   backdrop-filter: blur(10px);
 }
 
-/* WIN SCREEN */
+/* WIN */
 .win {
   position: fixed;
   top: 50%;
@@ -135,34 +129,19 @@ button {
   z-index: 10;
 }
 
-/* AUDIO */
 audio { display: none; }
-
 </style>
 </head>
 
 <body>
 
-<!-- BOTON SECRETO -->
 <button id="secretBtn" onclick="secret()">23/12/2005 💜 20/01/2003</button>
 
-<!-- MUSICA -->
-function secret(){
-  if(!playing){
-    music.volume = 0.5;
-    music.play().catch(e => {
-      alert("💜 tocá otra vez el botón para activar audio");
-    });
-    playing = true;
-  } else {
-    music.pause();
-    playing = false;
-  }
-}
+<audio id="music" src="music.mp3"></audio>
+
 <div class="container">
 
 <table>
-
 <tr>
 <td><span class="num">1</span><input data-a="D"></td>
 <td><input data-a="A"></td>
@@ -258,7 +237,6 @@ function secret(){
 <td><input data-a="R"></td>
 <td><input data-a="O"></td>
 </tr>
-
 </table>
 
 <div class="clues">
@@ -288,8 +266,7 @@ era un mensaje escondido.
 </div>
 
 <script>
-
-/* partículas */
+// partículas
 for(let i=0;i<40;i++){
   let p=document.createElement("div");
   p.className="particle";
@@ -298,22 +275,20 @@ for(let i=0;i<40;i++){
   document.body.appendChild(p);
 }
 
-/* música */
 let music=document.getElementById("music");
 let playing=false;
 
 function secret(){
   if(!playing){
-    music.play();
+    music.volume = 0.5;
+    music.play().catch(()=>alert("tocá de nuevo para activar audio 💜"));
     playing=true;
-    alert("💜 música activada");
   } else {
     music.pause();
     playing=false;
   }
 }
 
-/* check */
 function check(){
   let inputs=document.querySelectorAll("input");
   let ok=true;
@@ -335,7 +310,6 @@ function check(){
     alert("💜 casi…");
   }
 }
-
 </script>
 
 </body>
