@@ -1,24 +1,21 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <title>Crucigrama 💜</title>
 
-
 <style>
 body {
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Arial, sans-serif;
   background: radial-gradient(circle at top, #3b0764, #12001f);
+  font-family: Arial;
   color: white;
 }
 
-
-/* tarjeta */
 .container {
   display: flex;
   gap: 40px;
@@ -27,165 +24,146 @@ body {
   border-radius: 20px;
   box-shadow: 0 0 25px rgba(168,85,247,0.4);
   backdrop-filter: blur(10px);
-  animation: float 4s ease-in-out infinite;
 }
 
-
-@keyframes float {
-  0%,100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-}
-
-
-/* tabla */
-table {
-  border-collapse: collapse;
-}
-
+/* GRILLA */
+table { border-collapse: collapse; }
 
 td {
-  width: 45px;
-  height: 45px;
-  border: 1px solid rgba(255,255,255,0.2);
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,0.15);
 }
-
 
 input {
   width: 100%;
   height: 100%;
+  text-align: center;
   border: none;
   outline: none;
-  text-align: center;
-  font-size: 18px;
   text-transform: uppercase;
   background: rgba(168,85,247,0.15);
   color: white;
-  border-radius: 6px;
-  transition: 0.2s;
+  font-size: 14px;
 }
 
+.block { background: rgba(0,0,0,0.6); }
 
-input:focus {
-  background: rgba(168,85,247,0.35);
-  box-shadow: 0 0 8px #c084fc;
-}
-
-
-.block {
-  background: rgba(0,0,0,0.5);
-}
-
-
-/* pistas */
-.clues {
-  max-width: 250px;
-}
-
+/* PISTAS */
+.clues { max-width: 260px; }
 
 h2 {
   color: #d8b4fe;
   text-shadow: 0 0 10px #a855f7;
 }
 
-
-p {
-  opacity: 0.9;
-}
-
-
-/* botón */
+/* BOTÓN */
 button {
-  margin-top: 12px;
-  padding: 10px 15px;
+  margin-top: 10px;
+  padding: 10px 14px;
   border: none;
   border-radius: 12px;
   background: linear-gradient(45deg, #a855f7, #7c3aed);
   color: white;
+  font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(168,85,247,0.4);
-  transition: 0.2s;
 }
-
-
-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(168,85,247,0.7);
-}
-
-
-/* resultado */
-.result {
-  margin-top: 10px;
-  font-size: 14px;
-}
-
-
 </style>
 </head>
 
-
 <body>
-
 
 <div class="container">
 
+<!-- ===== CRUCIGRAMA ===== -->
+<div>
+<table>
 
-  <!-- CRUCIGRAMA -->
-  <div>
-    <table>
-      <tr>
-        <td><input maxlength="1" data-a="L"></td>
-        <td><input maxlength="1" data-a="I"></td>
-        <td><input maxlength="1" data-a="Z"></td>
-        <td class="block"></td>
-        <td><input maxlength="1" data-a="A"></td>
-      </tr>
+<tr>
+<td><input data-a="D"></td><td><input data-a="A"></td><td><input data-a="U"></td><td><input data-a="N"></td>
+<td class="block"></td>
+<td><input data-a="D"></td><td><input data-a="U"></td><td><input data-a="R"></td><td><input data-a="A"></td>
+</tr>
 
+<tr>
+<td><input data-a="C"></td><td><input data-a="H"></td><td><input data-a="E"></td><td><input data-a="S"></td><td><input data-a="T"></td><td><input data-a="E"></td><td><input data-a="R"></td>
+<td class="block"></td>
+<td><input data-a="T"></td>
+</tr>
 
-      <tr>
-        <td><input maxlength="1" data-a="M"></td>
-        <td class="block"></td>
-        <td><input maxlength="1" data-a="O"></td>
-        <td class="block"></td>
-        <td><input maxlength="1" data-a="R"></td>
-      </tr>
+<tr>
+<td><input data-a="T"></td><td><input data-a="A"></td><td><input data-a="C"></td><td><input data-a="O"></td>
+<td class="block"></td>
+<td><input data-a="M"></td><td><input data-a="I"></td><td><input data-a="L"></td><td><input data-a="A"></td><td><input data-a="N"></td><td><input data-a="E"></td><td><input data-a="S"></td><td><input data-a="O"></td>
+</tr>
 
+<tr>
+<td><input data-a="L"></td><td><input data-a="I"></td><td><input data-a="L"></td><td><input data-a="A"></td>
+<td class="block"></td>
+<td><input data-a="S"></td><td><input data-a="H"></td><td><input data-a="E"></td><td><input data-a="N"></td>
+<td class="block"></td>
+<td><input data-a="C"></td><td><input data-a="R"></td><td><input data-a="E"></td><td><input data-a="A"></td><td><input data-a="T"></td><td><input data-a="I"></td><td><input data-a="V"></td><td><input data-a="O"></td>
+</tr>
 
-      <tr>
-        <td><input maxlength="1" data-a="I"></td>
-        <td><input maxlength="1" data-a="S"></td>
-        <td><input maxlength="1" data-a="A"></td>
-        <td><input maxlength="1" data-a="M"></td>
-        <td><input maxlength="1" data-a="O"></td>
-      </tr>
-    </table>
+<tr>
+<td><input data-a="S"></td><td><input data-a="A"></td><td><input data-a="R"></td><td><input data-a="T"></td><td><input data-a="E"></td><td><input data-a="N"></td>
+<td class="block"></td>
+<td><input data-a="D"></td><td><input data-a="U"></td><td><input data-a="K"></td><td><input data-a="I"></td>
+<td class="block"></td>
+<td><input data-a="P"></td><td><input data-a="A"></td><td><input data-a="J"></td><td><input data-a="A"></td><td><input data-a="R"></td><td><input data-a="O"></td>
+<td class="block"></td>
+<td><input data-a="B"></td><td><input data-a="R"></td><td><input data-a="O"></td><td><input data-a="L"></td><td><input data-a="A"></td></td>
+</tr>
 
+</table>
 
-    <button onclick="check()">Verificar 💜</button>
-    <div class="result" id="res"></div>
-  </div>
+<button onclick="check()">Verificar 💜</button>
+</div>
 
+<!-- PISTAS -->
+<div class="clues">
+<h2>💜 Pistas</h2>
 
-  <!-- PISTAS -->
-  <div class="clues">
-    <h2>💜 Pistas</h2>
-    <p>1. Su nombre ✨</p>
-    <p>2. Lo que sentimos 💜</p>
-    <p>3. Lo que somos juntos</p>
-  </div>
-
+<p>DAUN</p>
+<p>DURA</p>
+<p>CHESTER</p>
+<p>TACO</p>
+<p>MILANESO</p>
+<p>LILA</p>
+<p>SHEN</p>
+<p>CREATIVO</p>
+<p>SARTEN</p>
+<p>DUKI</p>
+<p>PAJARO</p>
+<p>BRO</p>
 
 </div>
 
+</div>
 
 <script>
 function check() {
   const inputs = document.querySelectorAll("input");
   let ok = true;
 
-
   inputs.forEach(i => {
     if (i.dataset.a) {
       if (i.value.toUpperCase() !== i.dataset.a) {
         ok = false;
-        i.style.background = "rgba(255,
+        i.style.background = "rgba(255,0,0,0.3)";
+      } else {
+        i.style.background = "rgba(0,255,150,0.25)";
+      }
+    }
+  });
+
+  if (ok) {
+    alert("💜 Perfecto lo resolviste");
+  } else {
+    alert("💜 Casi seguí intentando");
+  }
+}
+</script>
+
+</body>
+</html>
