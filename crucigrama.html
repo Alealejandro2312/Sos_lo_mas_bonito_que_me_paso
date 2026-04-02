@@ -12,49 +12,74 @@ body {
   justify-content: center;
   align-items: center;
   background: radial-gradient(circle at top, #3b0764, #12001f);
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   color: white;
 }
 
+/* CONTENEDOR */
 .container {
   display: flex;
   gap: 40px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.06);
   padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0 0 25px rgba(168,85,247,0.4);
+  border-radius: 22px;
+  box-shadow: 0 0 30px rgba(168,85,247,0.4);
   backdrop-filter: blur(10px);
 }
 
-/* GRILLA */
-table { border-collapse: collapse; }
+/* TABLA */
+table {
+  border-collapse: collapse;
+}
 
 td {
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(255,255,255,0.15);
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.12);
+  position: relative;
 }
 
 input {
   width: 100%;
   height: 100%;
-  text-align: center;
   border: none;
   outline: none;
+  text-align: center;
   text-transform: uppercase;
-  background: rgba(168,85,247,0.15);
+  font-size: 16px;
+  background: rgba(168,85,247,0.12);
   color: white;
-  font-size: 14px;
+  border-radius: 5px;
 }
 
-.block { background: rgba(0,0,0,0.6); }
+/* CASILLAS NEGRAS */
+.block {
+  background: rgba(0,0,0,0.65);
+}
+
+/* NÚMEROS */
+.num {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font-size: 10px;
+  opacity: 0.8;
+  color: #d8b4fe;
+}
 
 /* PISTAS */
-.clues { max-width: 260px; }
+.clues {
+  max-width: 260px;
+}
 
 h2 {
   color: #d8b4fe;
   text-shadow: 0 0 10px #a855f7;
+}
+
+p {
+  opacity: 0.9;
+  margin: 6px 0;
 }
 
 /* BOTÓN */
@@ -75,67 +100,134 @@ button {
 
 <div class="container">
 
-<!-- ===== CRUCIGRAMA ===== -->
+<!-- ===== GRILLA ===== -->
 <div>
+
 <table>
 
+<!-- FILA 1 -->
 <tr>
-<td><input data-a="D"></td><td><input data-a="A"></td><td><input data-a="U"></td><td><input data-a="N"></td>
+<td><span class="num">1</span><input data-a="D"></td>
+<td><input data-a="A"></td>
+<td><input data-a="U"></td>
+<td><input data-a="N"></td>
+
 <td class="block"></td>
-<td><input data-a="D"></td><td><input data-a="U"></td><td><input data-a="R"></td><td><input data-a="A"></td>
+
+<td><span class="num">2</span><input data-a="D"></td>
+<td><input data-a="U"></td>
+<td><input data-a="R"></td>
+<td><input data-a="A"></td>
 </tr>
 
+<!-- FILA 2 -->
 <tr>
-<td><input data-a="C"></td><td><input data-a="H"></td><td><input data-a="E"></td><td><input data-a="S"></td><td><input data-a="T"></td><td><input data-a="E"></td><td><input data-a="R"></td>
-<td class="block"></td>
+<td><span class="num">3</span><input data-a="C"></td>
+<td><input data-a="H"></td>
+<td><input data-a="E"></td>
+<td><input data-a="S"></td>
 <td><input data-a="T"></td>
+<td><input data-a="E"></td>
+<td><input data-a="R"></td>
+
+<td class="block"></td>
+
+<td><span class="num">4</span><input data-a="T"></td>
 </tr>
 
+<!-- FILA 3 -->
 <tr>
-<td><input data-a="T"></td><td><input data-a="A"></td><td><input data-a="C"></td><td><input data-a="O"></td>
+<td><span class="num">5</span><input data-a="T"></td>
+<td><input data-a="A"></td>
+<td><input data-a="C"></td>
+<td><input data-a="O"></td>
+
 <td class="block"></td>
-<td><input data-a="M"></td><td><input data-a="I"></td><td><input data-a="L"></td><td><input data-a="A"></td><td><input data-a="N"></td><td><input data-a="E"></td><td><input data-a="S"></td><td><input data-a="O"></td>
+
+<td><span class="num">6</span><input data-a="M"></td>
+<td><input data-a="I"></td>
+<td><input data-a="L"></td>
+<td><input data-a="A"></td>
+<td><input data-a="N"></td>
+<td><input data-a="E"></td>
+<td><input data-a="S"></td>
+<td><input data-a="O"></td>
 </tr>
 
+<!-- FILA 4 -->
 <tr>
-<td><input data-a="L"></td><td><input data-a="I"></td><td><input data-a="L"></td><td><input data-a="A"></td>
+<td><span class="num">7</span><input data-a="L"></td>
+<td><input data-a="I"></td>
+<td><input data-a="L"></td>
+<td><input data-a="A"></td>
+
 <td class="block"></td>
-<td><input data-a="S"></td><td><input data-a="H"></td><td><input data-a="E"></td><td><input data-a="N"></td>
+
+<td><span class="num">8</span><input data-a="S"></td>
+<td><input data-a="H"></td>
+<td><input data-a="E"></td>
+<td><input data-a="N"></td>
+
 <td class="block"></td>
-<td><input data-a="C"></td><td><input data-a="R"></td><td><input data-a="E"></td><td><input data-a="A"></td><td><input data-a="T"></td><td><input data-a="I"></td><td><input data-a="V"></td><td><input data-a="O"></td>
+
+<td><span class="num">9</span><input data-a="C"></td>
+<td><input data-a="R"></td>
+<td><input data-a="E"></td>
+<td><input data-a="A"></td>
+<td><input data-a="T"></td>
+<td><input data-a="I"></td>
+<td><input data-a="V"></td>
+<td><input data-a="O"></td>
 </tr>
 
+<!-- FILA 5 -->
 <tr>
-<td><input data-a="S"></td><td><input data-a="A"></td><td><input data-a="R"></td><td><input data-a="T"></td><td><input data-a="E"></td><td><input data-a="N"></td>
+<td><span class="num">10</span><input data-a="S"></td>
+<td><input data-a="A"></td>
+<td><input data-a="R"></td>
+<td><input data-a="T"></td>
+<td><input data-a="E"></td>
+<td><input data-a="N"></td>
+
 <td class="block"></td>
-<td><input data-a="D"></td><td><input data-a="U"></td><td><input data-a="K"></td><td><input data-a="I"></td>
+
+<td><span class="num">11</span><input data-a="D"></td>
+<td><input data-a="U"></td>
+<td><input data-a="K"></td>
+<td><input data-a="I"></td>
+
 <td class="block"></td>
-<td><input data-a="P"></td><td><input data-a="A"></td><td><input data-a="J"></td><td><input data-a="A"></td><td><input data-a="R"></td><td><input data-a="O"></td>
-<td class="block"></td>
-<td><input data-a="B"></td><td><input data-a="R"></td><td><input data-a="O"></td><td><input data-a="L"></td><td><input data-a="A"></td></td>
+
+<td><span class="num">12</span><input data-a="P"></td>
+<td><input data-a="A"></td>
+<td><input data-a="J"></td>
+<td><input data-a="A"></td>
+<td><input data-a="R"></td>
+<td><input data-a="O"></td>
 </tr>
 
 </table>
 
 <button onclick="check()">Verificar 💜</button>
+
 </div>
 
-<!-- PISTAS -->
+<!-- ===== PISTAS (VACÍAS) ===== -->
 <div class="clues">
 <h2>💜 Pistas</h2>
 
-<p>DAUN</p>
-<p>DURA</p>
-<p>CHESTER</p>
-<p>TACO</p>
-<p>MILANESO</p>
-<p>LILA</p>
-<p>SHEN</p>
-<p>CREATIVO</p>
-<p>SARTEN</p>
-<p>DUKI</p>
-<p>PAJARO</p>
-<p>BRO</p>
+<p>1. ________</p>
+<p>2. ________</p>
+<p>3. ________</p>
+<p>4. ________</p>
+<p>5. ________</p>
+<p>6. ________</p>
+<p>7. ________</p>
+<p>8. ________</p>
+<p>9. ________</p>
+<p>10. ________</p>
+<p>11. ________</p>
+<p>12. ________</p>
 
 </div>
 
@@ -158,9 +250,9 @@ function check() {
   });
 
   if (ok) {
-    alert("💜 Perfecto lo resolviste");
+    alert("💜 Perfecto… lo resolviste");
   } else {
-    alert("💜 Casi seguí intentando");
+    alert("💜 Casi… seguí intentando");
   }
 }
 </script>
