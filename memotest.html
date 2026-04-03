@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>💜</title>
+
+
+<style>
+body {
+  margin: 0;
+  background: radial-gradient(circle, #2a004f, #0b001a);
+  font-family: Arial;
+  color: white;
+  text-align: center;
+}
+
+
+h1 {
+  margin-top: 10px;
+}
+
+
+#info {
+  display: flex;
+  justify-content: space-around;
+  font-size: 14px;
+  margin: 10px;
+}
+
+
+#game {
+  width: 95%;
+  max-width: 600px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+
+
+.card {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+  cursor: pointer;
+}
+
+
+.inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+
+
+.flipped .inner {
+  transform: rotateY(180deg);
+}
+
+
+.front, .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  backface-visibility: hidden;
+}
+
+
+.front {
+  background: #a855f7;
+}
+
+
+.back {
+  transform: rotateY(180deg);
+  background-size: cover;
+  background-position: center;
+}
+
+
+#winScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0b001a;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #a855f7;
+  color: white;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+
+<body>
+
+
+<h1>💜 Memotest 💜</h1>
+
+
+<div id="info">
+  <div>⏱️ Tiempo: <span id="time">0</span>s</div>
+  <div>🎯 Movimientos: <span id="moves">0</span></div>
+</div>
+
+
+<div id="game"></div>
+
+
+<div id="winScreen">
+  <h2>💌 GANASTE 💜</h2>
+  <p id="finalText">Escribí acá tu mensaje lindo 😏</p>
+  <button onclick="location.reload()">Jugar otra vez</button>
+</div>
+
+
+<audio id="winMusic" src="audio.mp3"></audio>
+<audio id="matchSound" src=""></audio>
+
+
+<script>
+// 🔥 CAMBIÁ ESTO CON TUS 18 FOTOS
+const images = [
+  "1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg",
+  "7.jpg","8.jpg","9.jpg","10.jpg","11.jpg","12.jpg",
+  "13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","18.jpg"
+];
+
+
+// duplicar → 36 cartas
+let cardsArray = [...images, ...images];
+
+
+// mezclar
+cardsArray.sort(() => 0.5 - Math.random());
+
+
+const game = document.getElementById("game");
+
+
+let firstCard = null;
+let secondCard = null;
+let lock = false;
+let matches = 0;
+let moves = 0;
+let time = 0;
+
+
+// ⏱️ cronómetro
+setInterval(() => {
+  time++;
+  document.getElementById("time").textContent = time;
+}, 1000);
+
+
+// crear cartas
+cardsArray.forEach(img => {
+  const card = document.createElement("div");
+  card.classList.add("card");
+
+
+  card.innerHTML = `
+    <div class="inner">
+      <div class="front"></div>
+      <div class="back" style="background-image:url('${img}')"></div>
+    </div>
+  `;
+
+
+  card.addEventListener("click", () => {
+    if (lock || card.classList.contains("flipped")) return;
+
+
+    card.classList.add("flipped");
+
+
+    if (!firstCard) {
+      firstCard = card;
+    } else {
+      secondCard = card;
+      lock = true;
+      moves++;
+      document.getElementById("moves").textContent = moves;
+
+
+      const img1 = firstCard.querySelector(".back").style.backgroundImage;
+      const img2 = secondCard.querySelector(".back").style.backgroundImage;
+
+
+      if (img1 === img2) {
+        matches++;
+        firstCard = null;
+        secondCard = null;
+        lock = false;
+
+
+        // sonido (opcional)
+        document.getElementById("matchSound").play().catch(()=>{});
+
+
+        if (matches === 18) {
+          setTimeout(() => {
+            document.getElementById("winScreen").style.display = "flex";
+            document.getElementById("winMusic").
