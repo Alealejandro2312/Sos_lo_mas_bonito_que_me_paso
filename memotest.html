@@ -99,15 +99,15 @@ body {
   flex-direction: column;
 }
 
-/* POEMA */
+/* POEMA FINAL */
 #poemaFinal {
-  margin-top: 20px;
+  max-width: 320px;
+  text-align: center;
+  line-height: 1.8;
+  font-size: 15px;
   opacity: 0;
   transform: translateY(20px);
   transition: 1s;
-  max-width: 300px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 #poemaFinal.mostrar {
@@ -116,7 +116,7 @@ body {
 }
 
 button {
-  margin-top: 10px;
+  margin-top: 15px;
   padding: 10px;
   border-radius: 10px;
   border: none;
@@ -140,42 +140,48 @@ button {
 
 <div id="game"></div>
 
+<!-- FINAL SOLO POEMA -->
 <div id="winScreen">
-  <h2>💌 GANASTE 💜</h2>
-  <p>llegaste hasta el final… 💜</p>
-  <button onclick="volver()">Volver</button>
-</div>
+  <div id="poemaFinal">
+    <p>
+      hay algo en vos<br>
+      que me calma sin avisar<br><br>
 
-<div id="poemaFinal">
-  <p>
-    hay algo en vos
-que me calma sin avisar
-como si todo el ruido
-dejara de importar
-cuando aparecés
-no sos solo lo que veo
-sos lo que me pasa
-la forma en que me hacés sonreír
-sin intentarlo
-la manera en que te pienso
-aunque no quiera
-y es raro…
-porque no te tengo cerca
-pero te siento conmigo
-en lo simple
-en lo cotidiano
-en cada momento donde me hacés bien
-y si algún día dudás
-de lo que sos para mí
-acordate de esto
-yo no te elegí por casualidad
-te elegiría siempre 💜
-  </p>
+      como si todo el ruido<br>
+      dejara de importar<br>
+      cuando aparecés<br><br>
+
+      no sos solo lo que veo<br>
+      sos lo que me pasa<br><br>
+
+      la forma en que me hacés sonreír<br>
+      sin intentarlo<br>
+      la manera en que te pienso<br>
+      aunque no quiera<br><br>
+
+      y es raro…<br>
+      porque no te tengo cerca<br>
+      pero te siento conmigo<br><br>
+
+      en lo simple<br>
+      en lo cotidiano<br>
+      en cada momento donde me hacés bien<br><br>
+
+      y si algún día dudás<br>
+      de lo que sos para mí<br><br>
+
+      acordate de esto<br><br>
+
+      yo no te elegí por casualidad<br><br>
+
+      te elegiría siempre 💜
+    </p>
+
+    <button onclick="volver()">Volver 💜</button>
+  </div>
 </div>
 
 <audio id="bgMusic" src="audio2.mp3" loop></audio>
-<audio id="flipSound" src="flip.mp3"></audio>
-<audio id="matchSound" src="match.mp3"></audio>
 
 <script>
 
@@ -219,8 +225,6 @@ cardsArray.forEach(img => {
   card.addEventListener("click", () => {
     if (lock || card.classList.contains("flipped")) return;
 
-    document.getElementById("flipSound").play().catch(()=>{});
-
     card.classList.add("flipped");
 
     if (!firstCard) {
@@ -240,8 +244,6 @@ cardsArray.forEach(img => {
       matches++;
       document.getElementById("hits").textContent = matches;
 
-      document.getElementById("matchSound").play().catch(()=>{});
-
       firstCard = null;
       secondCard = null;
       lock = false;
@@ -249,11 +251,7 @@ cardsArray.forEach(img => {
       if (matches === 18) {
         setTimeout(() => {
           document.getElementById("winScreen").style.display = "flex";
-
-          setTimeout(() => {
-            document.getElementById("poemaFinal").classList.add("mostrar");
-          }, 1500);
-
+          document.getElementById("poemaFinal").classList.add("mostrar");
         }, 500);
       }
 
