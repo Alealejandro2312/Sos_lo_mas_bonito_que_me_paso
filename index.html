@@ -92,7 +92,7 @@ button:hover {
 
 <!-- Corazones -->
 <script>
-for(let i=0;i<20;i++){
+for(let i=0;i<25;i++){
   let heart=document.createElement("div");
   heart.className="heart";
   heart.innerHTML="💜";
@@ -112,24 +112,21 @@ for(let i=0;i<20;i++){
     <h2>Para vos 💜</h2>
 
     <p>
-      No sé bien en qué momento pasó,
-      pero hablar con vos se volvió de lo mejor de mis días.
+      No sé en qué momento, pero te volviste parte de todo lo lindo de mis días.
     </p>
 
     <p>
-      Me gusta escucharte, me gusta cómo sos,
-      y la forma en la que haces que todo se sienta más lindo.
+      Me encanta cómo sos, cómo hablás, cómo me haces sentir.
     </p>
 
     <p>
-      Incluso así, a la distancia,
-      lográs estar cerquita de una forma que nadie más puede.
+      Y aunque sea así, a la distancia… estás más cerca de lo que pensás.
     </p>
 
-    <p><b>Y nada… me haces muy feliz 💜</b></p>
+    <p><b>Te quiero muchísimo 💜</b></p>
 
     <!-- BOTÓN DE AUDIOS -->
-    <button onclick="reproducirAudio()">Escuchame 🔊</button>
+    <button onclick="reproducirAudio()">Tocame 🔊</button>
   </div>
 </div>
 
@@ -142,16 +139,13 @@ function mostrar() {
   document.getElementById("mensaje").style.display = "block";
 }
 
-/* AUDIOS */
+/* LISTA DE AUDIOS 10 AL 30 */
 const audios = [
-  "audio10.mp3",
-  "audio11.mp3",
-  "audio12.mp3",
-  "audio13.mp3",
-  "audio14.mp3",
-  "audio15.mp3",
-  "audio16.mp3",
-  "audio17.mp3"
+  "audio10.mp3","audio11.mp3","audio12.mp3","audio13.mp3","audio14.mp3",
+  "audio15.mp3","audio16.mp3","audio17.mp3","audio18.mp3","audio19.mp3",
+  "audio20.mp3","audio21.mp3","audio22.mp3","audio23.mp3","audio24.mp3",
+  "audio25.mp3","audio26.mp3","audio27.mp3","audio28.mp3","audio29.mp3",
+  "audio30.mp3"
 ];
 
 let audioActual = new Audio();
