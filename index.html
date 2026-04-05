@@ -1,54 +1,81 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Para Liz 💜</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #d8b4fe, #a855f7);
-      font-family: Arial, sans-serif;
-      text-align: center;
-      color: #fff;
-      overflow: hidden;
-    }.card {
-  background: rgba(255,255,255,0.1);
+<meta charset="UTF-8">
+<title>Para Liz 💜</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #d8b4fe, #a855f7);
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Corazones */
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: flotar 6s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes flotar {
+  0% { transform: translateY(100vh); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+.card {
+  background: rgba(255,255,255,0.15);
   padding: 30px;
   border-radius: 20px;
   max-width: 400px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  animation: aparecer 1s ease;
+}
+
+@keyframes aparecer {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 button {
+  margin-top: 15px;
   padding: 12px 24px;
   font-size: 18px;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   background: #7e22ce;
   color: white;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 button:hover {
   background: #6b21a8;
+  transform: scale(1.05);
 }
 
 .hidden {
   display: none;
 }
 
-/* Botón secreto invisible */
+/* Botón secreto */
 .secret-btn {
   position: absolute;
   bottom: 15px;
   right: 15px;
   width: 25px;
   height: 25px;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.2);
   border-radius: 50%;
   cursor: pointer;
   backdrop-filter: blur(5px);
@@ -56,31 +83,94 @@ button:hover {
 }
 
 .secret-btn:hover {
-  background: rgba(255,255,255,
-
-  </style>
+  background: rgba(255,255,255,0.5);
+}
+</style>
 </head>
-<body><div id="inicio">
+
+<body>
+
+<!-- Corazones -->
+<script>
+for(let i=0;i<20;i++){
+  let heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="💜";
+  heart.style.left=Math.random()*100+"%";
+  heart.style.animationDuration=(4+Math.random()*4)+"s";
+  document.body.appendChild(heart);
+}
+</script>
+
+<div id="inicio">
   <h1>Tengo algo para vos 💜</h1>
   <button onclick="mostrar()">Abrir</button>
-</div><div id="mensaje" class="hidden">
+</div>
+
+<div id="mensaje" class="hidden">
   <div class="card">
-    <h2>Para Liz 💜</h2>
+    <h2>Para vos 💜</h2>
+
     <p>
-      No sé cómo explicarlo del todo, pero me encanta escucharte,
-      me encanta reírme con vos y sentir que, incluso a la distancia,
-      estás cerquita.
+      No sé bien en qué momento pasó,
+      pero hablar con vos se volvió de lo mejor de mis días.
     </p>
+
     <p>
-      Tu voz tiene algo que me calma, que me hace bien,
-      y cada momento con vos se siente especial.
+      Me gusta escucharte, me gusta cómo sos,
+      y la forma en la que haces que todo se sienta más lindo.
     </p>
-    <p><b>Y si tengo que decirlo simple… sos todo lo que quiero en esta vida 💜</b></p>
+
+    <p>
+      Incluso así, a la distancia,
+      lográs estar cerquita de una forma que nadie más puede.
+    </p>
+
+    <p><b>Y nada… me haces muy feliz 💜</b></p>
+
+    <!-- BOTÓN DE AUDIOS -->
+    <button onclick="reproducirAudio()">Escuchame 🔊</button>
   </div>
-</div><!-- BOTÓN SECRETO --><div class="secret-btn" onclick="window.location.href='secreto.html'"></div><script>
-  function mostrar() {
-    document.getElementById("inicio").style.display = "none";
-    document.getElementById("mensaje").style.display = "block";
-  }
-</script></body>
+</div>
+
+<!-- BOTÓN SECRETO -->
+<div class="secret-btn" onclick="window.location.href='secreto.html'"></div>
+
+<script>
+function mostrar() {
+  document.getElementById("inicio").style.display = "none";
+  document.getElementById("mensaje").style.display = "block";
+}
+
+/* AUDIOS */
+const audios = [
+  "audio10.mp3",
+  "audio11.mp3",
+  "audio12.mp3",
+  "audio13.mp3",
+  "audio14.mp3",
+  "audio15.mp3",
+  "audio16.mp3",
+  "audio17.mp3"
+];
+
+let audioActual = new Audio();
+let ultimoIndex = -1;
+
+function reproducirAudio() {
+  let random;
+
+  do {
+    random = Math.floor(Math.random() * audios.length);
+  } while (random === ultimoIndex);
+
+  ultimoIndex = random;
+
+  audioActual.pause();
+  audioActual = new Audio(audios[random]);
+  audioActual.play();
+}
+</script>
+
+</body>
 </html>
