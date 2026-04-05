@@ -11,61 +11,99 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #d8b4fe, #a855f7);
   font-family: Arial, sans-serif;
   text-align: center;
   color: #fff;
   overflow: hidden;
+  background: linear-gradient(-45deg, #d8b4fe, #a855f7, #7e22ce, #c084fc);
+  background-size: 400% 400%;
+  animation: fondo 10s ease infinite;
+}
+
+@keyframes fondo {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
 }
 
 /* Corazones */
 .heart {
   position: absolute;
-  font-size: 20px;
+  font-size: 18px;
   animation: flotar 6s linear infinite;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 @keyframes flotar {
-  0% { transform: translateY(100vh); opacity: 0; }
+  0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
   50% { opacity: 1; }
-  100% { transform: translateY(-10vh); opacity: 0; }
+  100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
 }
 
+/* Tarjeta */
 .card {
   background: rgba(255,255,255,0.15);
   padding: 30px;
-  border-radius: 20px;
+  border-radius: 25px;
   max-width: 400px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  animation: aparecer 1s ease;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  animation: aparecer 0.8s ease;
 }
 
 @keyframes aparecer {
-  from { transform: scale(0.8); opacity: 0; }
+  from { transform: scale(0.7); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
 
 button {
   margin-top: 15px;
-  padding: 12px 24px;
+  padding: 14px 26px;
   font-size: 18px;
   border: none;
-  border-radius: 12px;
+  border-radius: 15px;
   background: #7e22ce;
   color: white;
   cursor: pointer;
   transition: 0.3s;
+  animation: latido 2s infinite;
 }
 
 button:hover {
   background: #6b21a8;
-  transform: scale(1.05);
+  transform: scale(1.08);
+}
+
+@keyframes latido {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 .hidden {
   display: none;
+}
+
+/* Estado audio */
+#estado {
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Onda */
+.onda {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255,255,255,0.6);
+  border-radius: 50%;
+  animation: expandir 0.6s ease-out;
+  pointer-events: none;
+}
+
+@keyframes expandir {
+  from { transform: scale(1); opacity: 0.8; }
+  to { transform: scale(6); opacity: 0; }
 }
 
 /* Botón secreto */
@@ -78,7 +116,6 @@ button:hover {
   background: rgba(255,255,255,0.2);
   border-radius: 50%;
   cursor: pointer;
-  backdrop-filter: blur(5px);
   transition: 0.3s;
 }
 
@@ -90,9 +127,9 @@ button:hover {
 
 <body>
 
-<!-- Corazones -->
 <script>
-for(let i=0;i<25;i++){
+/* Corazones */
+for(let i=0;i<30;i++){
   let heart=document.createElement("div");
   heart.className="heart";
   heart.innerHTML="💜";
@@ -111,26 +148,19 @@ for(let i=0;i<25;i++){
   <div class="card">
     <h2>Para vos 💜</h2>
 
-    <p>
-      No sé en qué momento, pero te volviste parte de todo lo lindo de mis días.
-    </p>
+    <p>No sé en qué momento, pero te volviste parte de todo lo lindo de mis días.</p>
 
-    <p>
-      Me encanta cómo sos, cómo hablás, cómo me haces sentir.
-    </p>
+    <p>Me encanta cómo sos, cómo hablás, cómo me haces sentir.</p>
 
-    <p>
-      Y aunque sea así, a la distancia… estás más cerca de lo que pensás.
-    </p>
+    <p>Y aunque sea así, a la distancia… estás más cerca de lo que pensás.</p>
 
     <p><b>Te quiero muchísimo 💜</b></p>
 
-    <!-- BOTÓN DE AUDIOS -->
-    <button onclick="reproducirAudio()">Tocame 🔊</button>
+    <button onclick="reproducirAudio(event)">Tocame 🔊</button>
+    <div id="estado"></div>
   </div>
 </div>
 
-<!-- BOTÓN SECRETO -->
 <div class="secret-btn" onclick="window.location.href='secreto.html'"></div>
 
 <script>
@@ -139,7 +169,6 @@ function mostrar() {
   document.getElementById("mensaje").style.display = "block";
 }
 
-/* LISTA DE AUDIOS 10 AL 30 */
 const audios = [
   "audio10.mp3","audio11.mp3","audio12.mp3","audio13.mp3","audio14.mp3",
   "audio15.mp3","audio16.mp3","audio17.mp3","audio18.mp3","audio19.mp3",
@@ -151,7 +180,7 @@ const audios = [
 let audioActual = new Audio();
 let ultimoIndex = -1;
 
-function reproducirAudio() {
+function reproducirAudio(event) {
   let random;
 
   do {
@@ -163,6 +192,29 @@ function reproducirAudio() {
   audioActual.pause();
   audioActual = new Audio(audios[random]);
   audioActual.play();
+
+  // Vibración tipo grabadora
+  if (navigator.vibrate) {
+    navigator.vibrate([60, 30, 60]);
+  }
+
+  // Estado
+  document.getElementById("estado").innerText = "Reproduciendo... 💜";
+
+  audioActual.onended = () => {
+    document.getElementById("estado").innerText = "";
+  };
+
+  // Onda visual
+  let onda = document.createElement("div");
+  onda.className = "onda";
+  onda.style.left = event.clientX + "px";
+  onda.style.top = event.clientY + "px";
+  document.body.appendChild(onda);
+
+  setTimeout(() => {
+    onda.remove();
+  }, 600);
 }
 </script>
 
