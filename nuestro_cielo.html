@@ -1,216 +1,124 @@
 <!DOCTYPE html><html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌌 Nuestro cielo</title><style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  overflow:hidden;
-  background: radial-gradient(circle at 50% 60%, #12002b 0%, #050010 60%, #000 100%);
-  font-family: Arial, sans-serif;
-  color:white;
+<title>Libro para vos 💙</title><style>
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #0d0d1a, #1a1a40);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
 }
 
-canvas{
-  position:fixed;
-  top:0;left:0;
+.libro {
+  width: 350px;
+  height: 500px;
+  background: #2a2a5a;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+  position: relative;
+  overflow: hidden;
 }
 
-.ui{
-  position:fixed;
-  top:20px;
-  left:50%;
-  transform:translateX(-50%);
-  text-align:center;
-  z-index:10;
-  opacity:0.8;
+.pagina {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  animation: fade 0.5s ease;
 }
 
-.title{font-size:16px;opacity:0.6}
-.hint{font-size:12px;opacity:0.4}
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.8);
-  backdrop-filter:blur(10px);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:20;
+.pagina.activa {
+  display: flex;
 }
 
-.card{
-  width:85%;
-  max-width:320px;
-  background:rgba(255,255,255,0.08);
-  border-radius:20px;
-  padding:20px;
-  text-align:center;
+h2 {
+  text-align: center;
 }
 
-textarea{
-  width:100%;
-  margin-top:10px;
-  border-radius:12px;
-  border:none;
-  padding:10px;
+.texto {
+  text-align: center;
+  font-size: 16px;
 }
 
-button{
-  margin-top:10px;
-  padding:10px 16px;
-  border:none;
-  border-radius:12px;
-  background:linear-gradient(45deg,#a855f7,#6366f1);
-  color:white;
-  cursor:pointer;
+.galeria {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.message{
-  position:fixed;
-  bottom:30px;
-  width:100%;
-  text-align:center;
-  font-size:14px;
-  opacity:0;
-  transition:0.5s;
+.foto {
+  width: 90px;
+  height: 120px;
+  object-fit: cover;
+  border: 3px solid white;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.5);
 }
-</style></head>
-<body><canvas id="c"></canvas>
 
-<div class="ui">
-  <div class="title">nuestro cielo</div>
-  <div class="hint">tocá las estrellas ✨</div>
-</div><div id="modal" class="modal">
-  <div class="card">
-    <div id="q"></div>
-    <div id="yo" style="margin-top:8px;font-size:13px;opacity:0.7"></div>
-    <textarea id="input" placeholder="tu respuesta..."></textarea>
-    <button onclick="save()">guardar ✨</button>
+.rot1 { transform: rotate(-5deg); }
+.rot2 { transform: rotate(4deg); }
+.rot3 { transform: rotate(-3deg); }
+
+.botones-audio {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+button {
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #4b6cff;
+  color: white;
+}
+
+.nav {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav button {
+  background: #ffffff22;
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.decoracion {
+  position: absolute;
+  font-size: 20px;
+  opacity: 0.3;
+}
+
+.corazon1 { top: 10px; left: 10px; }
+.corazon2 { bottom: 20px; right: 15px; }
+
+</style></head><body><div class="libro"><!-- PAGINA 1 --><div class="pagina activa">
+  <div class="decoracion corazon1">💙</div>
+  <h2>Hola amorcito</h2>
+  <div class="texto">Este es un pequeño pedacito de todo lo que siento por vos</div>  <div class="galeria">
+    <img src="foto1.jpg" class="foto rot1">
+    <img src="foto2.jpg" class="foto rot2">
+  </div>  <div class="botones-audio">
+    <button onclick="audio1.play()">🎧 Audio 1</button>
+    <button onclick="audio2.play()">🎧 Audio 2</button>
   </div>
-</div><div id="msg" class="message"></div><script>
-const canvas=document.getElementById('c');
-const ctx=canvas.getContext('2d');
-canvas.width=innerWidth;
-canvas.height=innerHeight;
-
-let stars=[];
-let bgStars=[];
-
-// fondo más suave
-for(let i=0;i<150;i++){
-  bgStars.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*1.2,
-    t:Math.random()*100
-  });
-}
-
-const data=[
-  {q:"mi comida favorita 🍝",a:"milanesa"},
-  {q:"algo que me hace feliz",a:"hablar con vos"},
-  {q:"algo que me recuerda a vos",a:"las noches"},
-  {q:"mi momento favorito",a:"cuando estamos en llamada"},
-  {q:"algo que quiero con vos",a:"más momentos así"}
-];
-
-for(let i=0;i<data.length;i++){
-  stars.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    base:2.5,
-    pulse:Math.random()*100,
-    done:localStorage.getItem('star_'+i)?true:false,
-    i
-  });
-}
-
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  // fondo tenue
-  bgStars.forEach(s=>{
-    s.t+=0.03;
-    let glow=(Math.sin(s.t)*0.5+0.5)*0.5;
-    ctx.fillStyle=`rgba(255,255,255,${glow})`;
-    ctx.beginPath();
-    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    ctx.fill();
-  });
-
-  // conexiones más suaves
-  stars.forEach(a=>{
-    stars.forEach(b=>{
-      if(a.done && b.done){
-        let d=Math.hypot(a.x-b.x,a.y-b.y);
-        if(d<200){
-          ctx.strokeStyle="rgba(168,85,247,0.15)";
-          ctx.lineWidth=1;
-          ctx.beginPath();
-          ctx.moveTo(a.x,a.y);
-          ctx.lineTo(b.x,b.y);
-          ctx.stroke();
-        }
-      }
-    });
-  });
-
-  // estrellas principales
-  stars.forEach(s=>{
-    s.pulse+=0.04;
-    let glow=Math.sin(s.pulse)*1;
-
-    ctx.beginPath();
-    ctx.arc(s.x,s.y,s.base+glow,0,Math.PI*2);
-    ctx.fillStyle=s.done?"#c084fc":"rgba(255,255,255,0.9)";
-    ctx.shadowBlur=s.done?18:6;
-    ctx.shadowColor=s.done?"#c084fc":"white";
-    ctx.fill();
-  });
-
-  requestAnimationFrame(draw);
-}
-
-draw();
-
-let current=null;
-
-canvas.onclick=e=>{
-  stars.forEach(s=>{
-    let d=Math.hypot(e.clientX-s.x,e.clientY-s.y);
-    if(d<12){
-      open(s.i);
-    }
-  });
-}
-
-function open(i){
-  current=i;
-  document.getElementById('modal').style.display='flex';
-  document.getElementById('q').innerText=data[i].q;
-  document.getElementById('yo').innerText='yo: '+data[i].a;
-  document.getElementById('input').value=localStorage.getItem('star_'+i)||'';
-}
-
-function save(){
-  let val=document.getElementById('input').value;
-  if(!val)return;
-
-  localStorage.setItem('star_'+current,val);
-  stars[current].done=true;
-
-  document.getElementById('modal').style.display='none';
-
-  showMsg("esto ahora es nuestro 💜");
-}
-
-function showMsg(t){
-  let m=document.getElementById('msg');
-  m.innerText=t;
-  m.style.opacity=1;
-  setTimeout(()=>m.style.opacity=0,2000);
-}
-</script></body>
-</html>
+</div><!-- PAGINA 2 --><div class="pagina">
+  <h2>Vos 💙</h2>
+  <div class="texto">Me haces sentir cosas que nunca pensé sentir</div>  <div class="galeria">
+    <img src="foto3.jpg" class="foto rot2">
