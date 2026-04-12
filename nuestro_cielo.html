@@ -1,124 +1,198 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Libro para vos 💙</title><style>
+<title>Para Lizbeth 💜</title>
+
+<style>
 body {
   margin: 0;
-  background: linear-gradient(135deg, #0d0d1a, #1a1a40);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
+  font-family: 'Segoe UI', cursive;
+  background: linear-gradient(180deg, #e6ccff, #fdf7ff);
+  overflow-x: hidden;
+  animation: fadeIn 2s ease;
 }
 
-.libro {
-  width: 350px;
-  height: 500px;
-  background: #2a2a5a;
-  border-radius: 20px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.book {
+  width: 90%;
+  max-width: 650px;
+  margin: 40px auto;
+}
+
+.page {
+  background: white;
+  border-radius: 25px;
+  padding: 25px;
+  margin-bottom: 40px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
   position: relative;
-  overflow: hidden;
+  animation: slideUp 1s ease;
 }
 
-.pagina {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  animation: fade 0.5s ease;
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-.pagina.activa {
-  display: flex;
-}
-
-h2 {
+h1, h2 {
   text-align: center;
+  color: #a64dff;
 }
 
-.texto {
+.text {
   text-align: center;
-  font-size: 16px;
+  color: #555;
+  margin: 15px 0;
+  line-height: 1.6;
 }
 
-.galeria {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.foto {
-  width: 90px;
-  height: 120px;
-  object-fit: cover;
-  border: 3px solid white;
-  border-radius: 10px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.5);
-}
-
-.rot1 { transform: rotate(-5deg); }
-.rot2 { transform: rotate(4deg); }
-.rot3 { transform: rotate(-3deg); }
-
-.botones-audio {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-button {
-  border: none;
+.photo {
+  width: 85%;
+  margin: 20px auto;
   padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
-  background: #4b6cff;
-  color: white;
+  background: #f3e6ff;
+  border: 3px solid #d9b3ff;
+  border-radius: 20px;
+  transform: rotate(-3deg);
+  box-shadow: 6px 6px 15px rgba(0,0,0,0.15);
+  transition: transform 0.3s;
 }
 
-.nav {
-  position: absolute;
-  bottom: 10px;
+.photo:hover {
+  transform: scale(1.05) rotate(0deg);
+}
+
+.photo img {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  border-radius: 15px;
 }
 
-.nav button {
-  background: #ffffff22;
+.photo:nth-child(even) {
+  transform: rotate(3deg);
 }
 
-@keyframes fade {
-  from { opacity: 0; transform: translateX(20px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.decoracion {
+.decor {
   position: absolute;
   font-size: 20px;
-  opacity: 0.3;
+  opacity: 0.7;
 }
 
-.corazon1 { top: 10px; left: 10px; }
-.corazon2 { bottom: 20px; right: 15px; }
+.top-left { top: 10px; left: 15px; }
+.bottom-right { bottom: 10px; right: 15px; }
 
-</style></head><body><div class="libro"><!-- PAGINA 1 --><div class="pagina activa">
-  <div class="decoracion corazon1">💙</div>
-  <h2>Hola amorcito</h2>
-  <div class="texto">Este es un pequeño pedacito de todo lo que siento por vos</div>  <div class="galeria">
-    <img src="foto1.jpg" class="foto rot1">
-    <img src="foto2.jpg" class="foto rot2">
-  </div>  <div class="botones-audio">
-    <button onclick="audio1.play()">🎧 Audio 1</button>
-    <button onclick="audio2.play()">🎧 Audio 2</button>
-  </div>
-</div><!-- PAGINA 2 --><div class="pagina">
-  <h2>Vos 💙</h2>
-  <div class="texto">Me haces sentir cosas que nunca pensé sentir</div>  <div class="galeria">
-    <img src="foto3.jpg" class="foto rot2">
+button {
+  display: block;
+  margin: 15px auto;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(45deg, #bf80ff, #a64dff);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(166,77,255,0.4);
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+.heart {
+  text-align: center;
+  font-size: 30px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<div class="book">
+
+<div class="page">
+  <div class="decor top-left">✨</div>
+  <div class="decor bottom-right">💫</div>
+  <h1>Para Lizbeth 💜</h1>
+  <p class="text">
+    Hice esto para vos…<br>
+    porque sos alguien muy especial en mi vida,<br>
+    y quería que tengas algo que te haga sonreír siempre.
+  </p>
+  <div class="heart">💜</div>
+</div>
+
+<div class="page">
+  <h2>Nuestros recuerdos</h2>
+  <div class="photo"><img src="foto1.jpg"></div>
+  <div class="photo"><img src="foto2.jpg"></div>
+  <p class="text">
+    Cada momento con vos se queda guardado en mí,<br>
+    como algo que no quiero perder nunca.
+  </p>
+</div>
+
+<div class="page">
+  <h2>Lo que siento por vos</h2>
+  <p class="text">
+    Me encanta tu forma de ser,<br>
+    tu sonrisa, tu mirada…<br>
+    todo de vos tiene algo que me hace feliz 💜
+  </p>
+  <div class="photo"><img src="foto3.jpg"></div>
+</div>
+
+<div class="page">
+  <h2>Todo lo que viene</h2>
+  <div class="photo"><img src="foto4.jpg"></div>
+  <div class="photo"><img src="foto5.jpg"></div>
+  <p class="text">
+    Y aunque esto es solo un pequeño detalle…<br>
+    quiero que sea el comienzo de muchos momentos más juntos.
+  </p>
+</div>
+
+<div class="page">
+  <h2>Escuchá esto 💕</h2>
+
+  <button onclick="document.getElementById('audio1').play()">
+    ▶️ Un mensaje para vos
+  </button>
+  <audio id="audio1" src="audio1.mp3"></audio>
+
+  <button onclick="document.getElementById('audio2').play()">
+    ▶️ Otra cosita más 💜
+  </button>
+  <audio id="audio2" src="audio2.mp3"></audio>
+
+</div>
+
+<div class="page">
+  <h2>Para terminar...</h2>
+  <p class="text">
+    Gracias por existir,<br>
+    por ser vos,<br>
+    y por dejarme compartir momentos con alguien tan especial 💜
+  </p>
+  <div class="heart">💜</div>
+</div>
+
+</div>
+
+</body>
+</html>
